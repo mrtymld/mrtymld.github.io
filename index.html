@@ -7,13 +7,30 @@
     <div style="text-align:center">We are testing here if opened page can take CID from here</div>
     <button onclick="openWindow()">Open window</button>
     <script>
-        var openWindow = function() {
-            var w = window.open('https://mrtymld.bitbucket.io');
+//         var openWindow = function() {
+//             var w = window.open('https://mrtymld.bitbucket.io');
 
-            window.addEventListener("message", (event) => {
-                w.postMessage('Test', '*');
-            }, false);
-        }
+//             window.addEventListener("message", (event) => {
+//                 w.postMessage('Test', '*');
+//             }, false);
+//         }
+        
+        //create popup window
+    var domain = 'https://mrtymld.bitbucket.io';
+    var myPopup = window.open(domain);
+
+    //periodical message sender
+    setInterval(function(){
+        var message = 'Hello from GitHub!  The time is: ' + (new Date().getTime());
+        console.log('blog.local:  sending message:  ' + message);
+        myPopup.postMessage(message,domain); //send the message and target URI
+    },6000);
+
+    //listen to holla back
+    window.addEventListener('message',function(event) {
+        if(event.origin !== domain) return;
+        console.log('received response:  ',event.data);
+    },false);
     </script>
 
 </body>
