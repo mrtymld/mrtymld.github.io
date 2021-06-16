@@ -1,9 +1,20 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+<head>
+    <title></title>
+</head>
 <body>
+    <div style="text-align:center">We are testing here if opened page can take CID from here</div>
+    <button onclick="openWindow()">Open window</button>
+    <script>
+        var openWindow = function() {
+            var w = window.open('https://mrtymld.bitbucket.io');
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+            window.addEventListener("message", (event) => {
+                w.postMessage('Test', '*');
+            }, false);
+        }
+    </script>
 
 </body>
-</html> 
+</html>
